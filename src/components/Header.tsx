@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 
 interface HeaderProps {
   activeSection: string;
@@ -25,6 +25,13 @@ export default function Header({ activeSection }: HeaderProps) {
     setIsMenuOpen(false);
   };
 
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = '/Appasani_Karthikeya_Resume.pdf'; // place file in public folder
+    link.download = 'Appasani_Karthikeya_Resume.pdf';
+    link.click();
+  };
+
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
@@ -33,17 +40,19 @@ export default function Header({ activeSection }: HeaderProps) {
   ];
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-    }`}>
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             Appasani Karthikeya
           </div>
-          
+
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -55,6 +64,14 @@ export default function Header({ activeSection }: HeaderProps) {
                 {item.label}
               </button>
             ))}
+
+            {/* Download Resume Button */}
+            <button
+              onClick={downloadResume}
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+            >
+              <Download size={16} /> Resume
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -81,6 +98,13 @@ export default function Header({ activeSection }: HeaderProps) {
                   {item.label}
                 </button>
               ))}
+              {/* Mobile Resume Download */}
+              <button
+                onClick={downloadResume}
+                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                <Download size={16} /> Resume
+              </button>
             </div>
           </nav>
         )}
