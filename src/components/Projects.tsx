@@ -5,50 +5,26 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Backend API',
-      description: 'A robust RESTful API built with Node.js and Express, featuring user authentication, product management, order processing, and payment integration.',
-      image: 'https://images.pexels.com/photos/6348047/pexels-photo-6348047.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe'],
+      title: 'YouTube Summarizer using AI',
+      description: 'A web extension that uses AI for summarizing YouTube videos with additional features like chat with video. Built with Manifest V3 and multiple AI providers.',
+      image: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800',
+      tags: ['Manifest V3', 'JavaScript', 'Python', 'Flask/FastAPI', 'Cohere', 'Anthropic', 'Google Gemini'],
       status: 'Completed',
       links: {
-        demo: '#',
-        github: '#'
+        demo: 'https://github.com/AppasaniKarthikeya/Sample_YoutubeSummarizer',
+        github: 'https://github.com/AppasaniKarthikeya/Sample_YoutubeSummarizer'
       }
     },
     {
       id: 2,
-      title: 'Machine Learning Price Predictor',
-      description: 'An ML model that predicts real estate prices using Python and scikit-learn. Includes data preprocessing, feature engineering, and model evaluation.',
-      image: 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib'],
-      status: 'Completed',
+      title: 'Coming Soon - Project 2',
+      description: 'Currently working on an exciting new project. Details will be updated soon with live demo and source code.',
+      image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800',
+      tags: ['TBD'],
+      status: 'In Development',
       links: {
-        demo: '#',
-        github: '#'
-      }
-    },
-    {
-      id: 3,
-      title: 'Task Management System',
-      description: 'A full-stack web application for team task management with real-time updates, user roles, and project tracking capabilities.',
-      image: 'https://images.pexels.com/photos/3861943/pexels-photo-3861943.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'Node.js', 'Socket.io', 'PostgreSQL', 'Tailwind'],
-      status: 'In Progress',
-      links: {
-        demo: '#',
-        github: '#'
-      }
-    },
-    {
-      id: 4,
-      title: 'Data Analytics Dashboard',
-      description: 'Interactive dashboard for data visualization and analysis, built with modern web technologies and featuring real-time data processing.',
-      image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'D3.js', 'Python', 'FastAPI', 'Redis'],
-      status: 'Planning',
-      links: {
-        demo: '#',
-        github: '#'
+        demo: '',
+        github: ''
       }
     }
   ];
@@ -57,6 +33,7 @@ export default function Projects() {
     switch (status) {
       case 'Completed': return 'text-green-400 bg-green-400/20';
       case 'In Progress': return 'text-orange-400 bg-orange-400/20';
+      case 'In Development': return 'text-orange-400 bg-orange-400/20';
       case 'Planning': return 'text-blue-400 bg-blue-400/20';
       default: return 'text-gray-400 bg-gray-400/20';
     }
@@ -116,21 +93,29 @@ export default function Projects() {
 
                   {/* Project Links */}
                   <div className="flex gap-4">
-                    <a
-                      href={project.links.demo}
-                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link"
-                    >
-                      <ExternalLink size={16} />
-                      <span className="text-sm font-medium">Live Demo</span>
-                      <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                    </a>
-                    <a
-                      href={project.links.github}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                    >
-                      <Github size={16} />
-                      <span className="text-sm font-medium">Code</span>
-                    </a>
+                    {project.links.demo && (
+                      <a
+                        href={project.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors group/link"
+                      >
+                        <ExternalLink size={16} />
+                        <span className="text-sm font-medium">View Project</span>
+                        <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                      </a>
+                    )}
+                    {project.links.github && (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Github size={16} />
+                        <span className="text-sm font-medium">Code</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -142,7 +127,9 @@ export default function Projects() {
         <div className="text-center mt-16">
           <p className="text-gray-300 mb-6">Want to see more of my work?</p>
           <a
-            href="https://github.com"
+            href="https://github.com/AppasaniKarthikeya"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
           >
             <Github size={20} />
