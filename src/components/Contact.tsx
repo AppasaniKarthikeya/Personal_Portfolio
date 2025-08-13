@@ -1,7 +1,15 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, Check } from 'lucide-react';
 
 export default function Contact() {
+  const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
   const socialLinks = [
     { icon: <Github size={20} />, href: 'https://github.com/AppasaniKarthikeya', label: 'GitHub' },
     { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/appasani-karthikeya-5325a0374/', label: 'LinkedIn' },
@@ -13,6 +21,48 @@ export default function Contact() {
     { icon: <Phone size={20} />, label: 'Phone', value: '+91 9676374416' },
     { icon: <MapPin size={20} />, label: 'Location', value: 'Hyderabad, India' }
   ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    const formURL =
+      'https://docs.google.com/forms/d/e/1FAIpQLSe2P4-TJtE0F4YqPD06D39uzuA5c40R8wVt66eYace38trfEw/formResponse';
+
+    const formBody = new FormData();
+    formBody.append('entry.1711669392', formData.name);
+    formBody.append('entry.872050336', formData.email);
+    formBody.append('entry.1671432879', formData.message);
+
+    try {
+      await fetch(formURL, {
+        method: 'POST',
+        body: formBody,
+        mode: 'no-cors' // prevents CORS issues
+      });
+
+      // Show success state
+      setIsSent(true);
+      setFormData({ name: '', email: '', message: '' });
+
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setIsSent(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Something went wrong. Please try again later.');
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <section id="contact" className="py-20 bg-slate-900">
@@ -27,22 +77,18 @@ export default function Contact() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+          {/* Contact Info */}
           <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
-              <p className="text-gray-300 leading-relaxed mb-8">
-                Whether you're looking for a backend engineer, have a project in mind, or just want to connect, 
-                I'd love to hear from you. Feel free to reach out through any of the channels below.
-              </p>
-            </div>
+            <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
+            <p className="text-gray-300 leading-relaxed mb-8">
+              Whether you're looking for a backend engineer, have a project in mind, or just want to connect, I'd love to hear from you.
+            </p>
 
-            {/* Contact Details */}
             <div className="space-y-4">
               {contactInfo.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-4 p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg hover:border-blue-500/50 transition-colors"
+                  className="flex items-center gap-4 p-4 bg-slate-800/50 border border-slate-700 rounded-lg hover:border-blue-500/50 transition-colors"
                 >
                   <div className="text-blue-400">{item.icon}</div>
                   <div>
@@ -53,7 +99,6 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Social Links */}
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Follow Me</h4>
               <div className="flex gap-4">
@@ -63,7 +108,7 @@ export default function Contact() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg text-gray-400 hover:text-white hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-110"
+                    className="p-3 bg-slate-800/50 border border-slate-700 rounded-lg text-gray-400 hover:text-white hover:border-blue-500/50 transition-all duration-300 hover:scale-110"
                     aria-label={social.label}
                   >
                     {social.icon}
@@ -73,61 +118,71 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Form (Google Form Integration) */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
-            <form
-              action="https://docs.google.com/forms/d/e/1FAIpQLSe2P4-TJtE0F4YqPD06D39uzuA5c40R8wVt66eYace38trfEw/formResponse"
-              method="POST"
-              target="_blank"
-              className="space-y-6"
-            >
+          {/* Contact Form */}
+          <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
                 <input
                   type="text"
-                  id="name"
-                  name="entry.1711669392"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   placeholder="Your Name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
                 <input
                   type="email"
-                  id="email"
-                  name="entry.872050336"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Message
-                </label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
                 <textarea
-                  id="message"
-                  name="entry.1671432879"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-vertical"
-                  placeholder="Tell me about your project or just say hello..."
+                  className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-vertical"
+                  placeholder="Tell me about your project..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
+                disabled={isSending}
+                className={`w-full font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
+                  isSent
+                    ? 'bg-green-500 text-white'
+                    : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white'
+                }`}
               >
-                Send Message
+                {isSending ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Sending...
+                  </>
+                ) : isSent ? (
+                  <>
+                    <Check size={20} /> Message Sent
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} /> Send Message
+                  </>
+                )}
               </button>
             </form>
           </div>
