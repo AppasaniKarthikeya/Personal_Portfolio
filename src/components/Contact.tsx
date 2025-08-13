@@ -29,9 +29,9 @@ export default function Contact() {
   };
 
   const socialLinks = [
-    { icon: <Github size={20} />, href: '#', label: 'GitHub' },
-    { icon: <Linkedin size={20} />, href: '#', label: 'LinkedIn' },
-    { icon: <Twitter size={20} />, href: '#', label: 'Twitter' }
+    { icon: <Github size={20} />, href: 'https://github.com/AppasaniKarthikeya', label: 'GitHub' },
+    { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/appasani-karthikeya-5325a0374/', label: 'LinkedIn' },
+    { icon: <Twitter size={20} />, href: 'https://x.com/Karthikeya2211', label: 'Twitter' }
   ];
 
   const contactInfo = [
@@ -86,6 +86,8 @@ export default function Contact() {
                   <a
                     key={index}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg text-gray-400 hover:text-white hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-110"
                     aria-label={social.label}
                   >
