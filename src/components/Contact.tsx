@@ -1,33 +1,7 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import React from 'react';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Message sent successfully! I\'ll get back to you soon.');
-      setFormData({ name: '', email: '', message: '' });
-      setIsSubmitting(false);
-    }, 1000);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   const socialLinks = [
     { icon: <Github size={20} />, href: 'https://github.com/AppasaniKarthikeya', label: 'GitHub' },
     { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/appasani-karthikeya-5325a0374/', label: 'LinkedIn' },
@@ -66,10 +40,11 @@ export default function Contact() {
             {/* Contact Details */}
             <div className="space-y-4">
               {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-center gap-4 p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg hover:border-blue-500/50 transition-colors">
-                  <div className="text-blue-400">
-                    {item.icon}
-                  </div>
+                <div
+                  key={index}
+                  className="flex items-center gap-4 p-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg hover:border-blue-500/50 transition-colors"
+                >
+                  <div className="text-blue-400">{item.icon}</div>
                   <div>
                     <p className="text-sm text-gray-400">{item.label}</p>
                     <p className="text-white font-medium">{item.value}</p>
@@ -98,9 +73,14 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Contact Form (Google Form Integration) */}
           <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              action="https://docs.google.com/forms/d/e/1FAIpQLSe2P4-TJtE0F4YqPD06D39uzuA5c40R8wVt66eYace38trfEw/formResponse"
+              method="POST"
+              target="_blank"
+              className="space-y-6"
+            >
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   Name
@@ -108,9 +88,7 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  name="entry.1711669392"
                   required
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                   placeholder="Your Name"
@@ -124,9 +102,7 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  name="entry.872050336"
                   required
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
                   placeholder="your.email@example.com"
@@ -139,9 +115,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  name="entry.1671432879"
                   required
                   rows={5}
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-vertical"
@@ -151,20 +125,9 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-500 disabled:to-gray-600 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
               >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    Send Message
-                  </>
-                )}
+                Send Message
               </button>
             </form>
           </div>
