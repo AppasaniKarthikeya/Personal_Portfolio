@@ -9,7 +9,7 @@ export default function Projects() {
       description: 'A web extension that uses AI for summarizing YouTube videos with additional features like chat with video. Built with Manifest V3 and multiple AI providers.',
       image: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800',
       tags: ['Manifest V3', 'JavaScript', 'Python', 'Flask/FastAPI', 'Cohere', 'Anthropic', 'Google Gemini'],
-      status: 'Completed',
+      status: 'In Progress',
       links: {
         demo: 'https://github.com/AppasaniKarthikeya/Sample_YoutubeSummarizer',
         github: 'https://github.com/AppasaniKarthikeya/Sample_YoutubeSummarizer'
@@ -17,14 +17,14 @@ export default function Projects() {
     },
     {
       id: 2,
-      title: 'Coming Soon - Project 2',
-      description: 'Currently working on an exciting new project. Details will be updated soon with live demo and source code.',
-      image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['TBD'],
-      status: 'In Development',
+      title: 'TFI Quiz - Tollywood Quiz Game',
+      description: 'An interactive quiz game similar to KBC focused on Tollywood movies and actors. Built as a desktop application with engaging UI, animations, and audio integration.',
+      image: 'https://images.pexels.com/photos/5428836/pexels-photo-5428836.jpeg?auto=compress&cs=tinysrgb&w=800',
+      tags: ['Python', 'PyQt5', 'Qt Designer', 'JSON', 'OOP', 'PyInstaller', 'UI/UX Design', 'Audio Integration'],
+      status: 'In Progress',
       links: {
-        demo: '',
-        github: ''
+        demo: 'https://github.com/AppasaniKarthikeya/TFI_QUIZ',
+        github: 'https://github.com/AppasaniKarthikeya/TFI_QUIZ'
       }
     }
   ];
