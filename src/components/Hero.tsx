@@ -15,11 +15,11 @@ export default function Hero() {
         <div className="mb-8">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-orange-400 bg-clip-text text-transparent">
-              I'm Karthikeya
+              I'm Appasani Karthikeya
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-2 font-light">
-            Aspiring Backend Engineer
+            Aspiring ML Engineer
           </p>
           <p className="text-lg md:text-xl text-gray-400 mb-8">
             Machine Learning Enthusiast • Problem Solver • Code Craftsman
