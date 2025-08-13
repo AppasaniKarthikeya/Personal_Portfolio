@@ -8,7 +8,7 @@ export default function Hero() {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // Make sure this file is in the public folder
+    link.href = '/Appasani_Karthikeya_Resume.pdf'; // Make sure this file is in the public folder
     link.download = 'Appasani_Karthikeya_Resume.pdf';
     document.body.appendChild(link);
     link.click();
