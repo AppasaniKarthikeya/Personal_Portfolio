@@ -47,7 +47,7 @@ export default function About() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
             <div className="relative bg-slate-800 rounded-2xl p-2">
               <img
-                src="/WhatsApp Image 2025-08-13 at 17.45.28_63e18480.jpg"
+                src="/pfpjpg.jpg"
                 alt="Karthikeya - Backend Engineer"
                 className="w-full h-96 object-cover rounded-xl"
               />
