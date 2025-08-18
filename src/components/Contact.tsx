@@ -17,7 +17,7 @@ export default function Contact() {
   ];
 
   const contactInfo = [
-    { icon: <Mail size={20} />, label: 'Email', value: 'karthikeyaappasani17@gmail.com' },
+    { icon: <Mail size={20} />, label: 'Email', value: 'ammavanshi16@gnail.com' },
     { icon: <Phone size={20} />, label: 'Phone', value: '+91 9676374416' },
     { icon: <MapPin size={20} />, label: 'Location', value: 'Hyderabad, India' }
   ];
